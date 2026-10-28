@@ -1,6 +1,7 @@
 import sys, requests, asyncio, aiohttp
 from urllib.parse import urlsplit, urljoin
 from crawl import extract_page_data, normalize_url
+from json_report import write_json_report
 
 class AsyncCrawler:
     def __init__(self, base_url, max_conc, max_pages):
@@ -108,8 +109,7 @@ async def main():
     
     print("starting crawl of:", BASE_URL)    
     page_data = await crawl_site_async(BASE_URL, MAX_CONC, MAX_PAGES)
-    for page in page_data:
-        print(page)
+    write_json_report(page_data)
 
  
 
