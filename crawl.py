@@ -39,3 +39,18 @@ def get_images_from_html(html:str, base_url:str) -> list:
         if img.get('src') != "": 
             resultlist.append(urljoin(base_url, img.get('src')))
     return resultlist
+
+def extract_page_data(html:str, page_url:str) -> dict:
+    extracted_heading = get_heading_from_html(html)
+    extracted_paragraph = get_first_paragraph_from_html(html)
+    extracted_links = get_urls_from_html(html, page_url)
+    extracted_imgs = get_images_from_html(html, page_url)
+
+    return {
+                "url": page_url,
+                "heading": extracted_heading,
+                "first_paragraph": extracted_paragraph,
+                "outgoing_links": extracted_links,
+                "image_urls": extracted_imgs
+            }
+
